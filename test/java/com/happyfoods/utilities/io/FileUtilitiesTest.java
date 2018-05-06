@@ -43,4 +43,9 @@ public class FileUtilitiesTest {
 		FileUtilities.createFileHandler("fileHandler").get();
 		verifyZeroInteractions(logger);
 	}
+
+	@Test
+	public void testThatSystemTemporaryDirectoryPatternIsPercentageAndTheLetterTEscapedWithSlash() {
+		assertThat(FileUtilities.getSystemTemporaryDirectoryPattern()).isEqualTo("%t/");
+	}
 }

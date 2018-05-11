@@ -1,11 +1,11 @@
 package com.happyfoods.utilities.io;
 
 import com.happyfoods.utilities.reflection.ReflectionUtilities;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.lang.reflect.Field;
 import java.util.logging.Logger;
@@ -14,38 +14,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
-@RunWith(MockitoJUnitRunner.class)
-public class FileUtilitiesTest {
+@ExtendWith(MockitoExtension.class)
+class FileUtilitiesTest {
 
 	@Mock
 	private Logger logger;
 
-	@Before
-	public void beforeEachTest() {
+	@BeforeEach
+	void beforeEachTest() {
 		Field loggerField = ReflectionUtilities.getField(FileUtilities.class, "logger");
 		ReflectionUtilities.setPrivateStaticFinalField(loggerField, logger);
 	}
 
 	@Test
-	public void testThatFileHandlerWithNullNameReturnsEmptyAndLogsWarning() {
+	void testThatFileHandlerWithNullNameReturnsEmptyAndLogsWarning() {
 		assertThat(FileUtilities.createFileHandler(null)).isEmpty();
 		verify(logger).warning("Cannot create file handler without a name");
 	}
 
 	@Test
-	public void testThatFileHandlerWithEmptyNameReturnsEmptyAndLogsWarning() {
+	void testThatFileHandlerWithEmptyNameReturnsEmptyAndLogsWarning() {
 		assertThat(FileUtilities.createFileHandler("")).isEmpty();
 		verify(logger).warning("Cannot create file handler without a name");
 	}
 
 	@Test
-	public void testThatFileHandlerWithNameCanBeCreated() {
+	void testThatFileHandlerWithNameCanBeCreated() {
 		FileUtilities.createFileHandler("fileHandler").get();
 		verifyZeroInteractions(logger);
 	}
 
 	@Test
-	public void testThatSystemTemporaryDirectoryPatternIsPercentageAndTheLetterTEscapedWithSlash() {
+	void testThatSystemTemporaryDirectoryPatternIsPercentageAndTheLetterTEscapedWithSlash() {
 		assertThat(FileUtilities.getSystemTemporaryDirectoryPattern()).isEqualTo("%t/");
 	}
 }

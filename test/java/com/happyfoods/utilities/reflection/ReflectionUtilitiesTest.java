@@ -1,11 +1,11 @@
 package com.happyfoods.utilities.reflection;
 
 import com.google.common.collect.ImmutableList;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -16,8 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ReflectionUtilitiesTest {
+@ExtendWith(MockitoExtension.class)
+class ReflectionUtilitiesTest {
 	private static final String DEFAULT_PRIVATE_VALUE = "defaultPrivateValue";
 	private static final String DEFAULT_PRIVATE_STATIC_VALUE = "defaultPrivateStaticValue";
 	private static final Logger DEFAULT_PRIVATE_STATIC_FINAL_VALUE = getLogger(ClassWithPrivateStuff.class.getSimpleName());
@@ -30,26 +30,26 @@ public class ReflectionUtilitiesTest {
 	@Spy
 	private Logger logger = getLogger(ReflectionUtilitiesTest.class.getSimpleName());
 
-	@Before
-	public void beforeEachTest() {
+	@BeforeEach
+	void beforeEachTest() {
 		// This is so meta.
 		Field loggerField = ReflectionUtilities.getField(ReflectionUtilities.class, "logger");
 		ReflectionUtilities.setPrivateStaticFinalField(loggerField, logger);
 	}
 
 	@Test
-	public void testThatFailingToCreateAnInstanceOfPrivateClassLogsAndReturnsNull() {
+	void testThatFailingToCreateAnInstanceOfPrivateClassLogsAndReturnsNull() {
 		assertThat(ReflectionUtilities.createInstance(ClassWithPrivateStuff.class)).isNull();
 		verify(logger).severe(ERROR_CANNOT_ACCESS_PRIVATE_MEMBER);
 	}
 
 	@Test
-	public void testCreatingAnInstanceOfPublicClass() {
+	void testCreatingAnInstanceOfPublicClass() {
 		assertThat(ReflectionUtilities.createInstance(ClassWithPublicStuff.class)).isNotNull();
 	}
 
 	@Test
-	public void testThatCreatingAnInstanceOfPrivateClassLogsAndReturnsNull() {
+	void testThatCreatingAnInstanceOfPrivateClassLogsAndReturnsNull() {
 		ClassWithPrivateStuff instance = ReflectionUtilities.createInstance(ClassWithPrivateStuff.class,
 				ImmutableList.of(String.class, Integer.class),
 				"argumentOne", 2);
@@ -58,7 +58,7 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testCreatingAnInstanceOfPublicClassUsingMultipleArguments() {
+	void testCreatingAnInstanceOfPublicClassUsingMultipleArguments() {
 		ClassWithPublicStuff instance = ReflectionUtilities.createInstance(ClassWithPublicStuff.class,
 				ImmutableList.of(String.class, Integer.class),
 				"argumentOne", 2);
@@ -66,23 +66,23 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testThatNonExistingMethodThrowsLogsAndReturnsNull() {
+	void testThatNonExistingMethodThrowsLogsAndReturnsNull() {
 		assertThat(ReflectionUtilities.getMethod(ClassWithPrivateStuff.class, "getNonExistingMethod")).isNull();
 		verify(logger).warning(COULD_NOT_FIND_METHOD);
 	}
 
 	@Test
-	public void testThatPrivateMethodCanBeRetrievedFromClass() {
+	void testThatPrivateMethodCanBeRetrievedFromClass() {
 		assertThat(ReflectionUtilities.getMethod(ClassWithPrivateStuff.class, "getPrivateValue")).isNotNull();
 	}
 
 	@Test
-	public void testThatPublicMethodCanBeRetrievedFromClass() {
+	void testThatPublicMethodCanBeRetrievedFromClass() {
 		assertThat(ReflectionUtilities.getMethod(ClassWithPublicStuff.class, "getPublicValue")).isNotNull();
 	}
 
 	@Test
-	public void testThatInvokingAccessorMethodWithWrongClassTypeLogsAndReturnsNull() {
+	void testThatInvokingAccessorMethodWithWrongClassTypeLogsAndReturnsNull() {
 		ClassWithPublicStuff instance = new ClassWithPublicStuff();
 		Method method = ReflectionUtilities.getMethod(ClassWithPublicStuff.class, "getPublicValue");
 		WrongClassType accessorValueOfWrongType = ReflectionUtilities.invokePublicMethod(instance, method, WrongClassType.class);
@@ -91,7 +91,7 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testThatPrivateAccessorMethodCannotBeInvoked() {
+	void testThatPrivateAccessorMethodCannotBeInvoked() {
 		ClassWithPrivateStuff instance = new ClassWithPrivateStuff();
 		Method method = ReflectionUtilities.getMethod(ClassWithPrivateStuff.class, "getPrivateValue");
 		String accessorValue = ReflectionUtilities.invokePublicMethod(instance, method, String.class);
@@ -100,7 +100,7 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testThatPublicAccessorMethodCanBeInvoked() {
+	void testThatPublicAccessorMethodCanBeInvoked() {
 		ClassWithPublicStuff instance = new ClassWithPublicStuff();
 		Method method = ReflectionUtilities.getMethod(ClassWithPublicStuff.class, "getPublicValue");
 		String accessorValue = ReflectionUtilities.invokePublicMethod(instance, method, String.class);
@@ -108,7 +108,7 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testThatPrivateMutatorMethodCannotBeCalled() {
+	void testThatPrivateMutatorMethodCannotBeCalled() {
 		ClassWithPrivateStuff instance = new ClassWithPrivateStuff();
 		Method method = ReflectionUtilities.getMethod(ClassWithPrivateStuff.class, "setPrivateValue", String.class);
 		ReflectionUtilities.invokePublicMethod(instance, method, "argument");
@@ -116,7 +116,7 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testThatPublicMutatorMethodCanBeCalled() {
+	void testThatPublicMutatorMethodCanBeCalled() {
 		ClassWithPublicStuff instance = new ClassWithPublicStuff();
 		Method method = ReflectionUtilities.getMethod(ClassWithPublicStuff.class, "setPublicValue", String.class);
 		ReflectionUtilities.invokePublicMethod(instance, method, "argument");
@@ -124,23 +124,23 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testThatWrongFieldNameLogsAndReturnsNullWhenRetrievingField() {
+	void testThatWrongFieldNameLogsAndReturnsNullWhenRetrievingField() {
 		assertThat(ReflectionUtilities.getField(ClassWithPublicStuff.class, "nonExistingFieldName")).isNull();
 		verify(logger).warning("Could not find class com.happyfoods.utilities.reflection.ReflectionUtilitiesTest$ClassWithPublicStuff.nonExistingFieldName");
 	}
 
 	@Test
-	public void testThatPrivateFieldCanBeRetrievedFromClass() {
+	void testThatPrivateFieldCanBeRetrievedFromClass() {
 		assertThat(ReflectionUtilities.getField(ClassWithPrivateStuff.class, "privateValue")).isNotNull();
 	}
 
 	@Test
-	public void testThatPublicFieldCanBeRetrievedFromClass() {
+	void testThatPublicFieldCanBeRetrievedFromClass() {
 		assertThat(ReflectionUtilities.getField(ClassWithPublicStuff.class, "publicValue")).isNotNull();
 	}
 
 	@Test
-	public void testThatChangingFieldOfAnotherClassLogs() {
+	void testThatChangingFieldOfAnotherClassLogs() {
 		ClassWithPublicStuff instance = new ClassWithPublicStuff();
 		Field publicFieldOfAnotherClass = ReflectionUtilities.getField(WrongClassType.class, "publicValue");
 		ReflectionUtilities.setPublicField(publicFieldOfAnotherClass, instance, "argument");
@@ -149,7 +149,7 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testThatPublicFieldInInstanceCanBeChanged() {
+	void testThatPublicFieldInInstanceCanBeChanged() {
 		ClassWithPublicStuff instance = new ClassWithPublicStuff();
 		Field publicField = ReflectionUtilities.getField(ClassWithPublicStuff.class, "publicValue");
 		ReflectionUtilities.setPublicField(publicField, instance, "argument");
@@ -157,14 +157,14 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testThatPublicStaticFieldInClassCanBeChanged() {
+	void testThatPublicStaticFieldInClassCanBeChanged() {
 		Field publicStaticField = ReflectionUtilities.getField(ClassWithPublicStuff.class, "publicStaticValue");
 		ReflectionUtilities.setPublicField(publicStaticField, "argument");
 		assertThat(ClassWithPublicStuff.getPublicStaticValue()).isEqualTo("argument");
 	}
 
 	@Test
-	public void testThatPrivateFieldOfInstanceCanBeChanged() {
+	void testThatPrivateFieldOfInstanceCanBeChanged() {
 		ClassWithPrivateStuff instance = new ClassWithPrivateStuff();
 		Field privateField = ReflectionUtilities.getField(ClassWithPrivateStuff.class, "privateValue");
 		ReflectionUtilities.setPrivateField(privateField, instance, "argument");
@@ -172,14 +172,14 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testThatPrivateStaticFieldOfClassCanBeChanged() {
+	void testThatPrivateStaticFieldOfClassCanBeChanged() {
 		Field privateField = ReflectionUtilities.getField(ClassWithPrivateStuff.class, "privateStaticValue");
 		ReflectionUtilities.setPrivateField(privateField, "argument");
 		assertThat(ClassWithPrivateStuff.getPrivateStaticValue()).isEqualTo("argument");
 	}
 
 	@Test
-	public void testThatConstantCannotBeChanged() {
+	void testThatConstantCannotBeChanged() {
 		Field privateStaticFinalField = ReflectionUtilities.getField(ClassWithPrivateStuff.class, "CONSTANT_VALUE");
 		ReflectionUtilities.setPrivateStaticFinalField(privateStaticFinalField, "NEW VALUE");
 		assertThat(ClassWithPrivateStuff.getConstantValue()).isEqualTo(DEFAULT_CONSTANT_VALUE);
@@ -187,7 +187,7 @@ public class ReflectionUtilitiesTest {
 	}
 
 	@Test
-	public void testThatPrivateStaticFinalFieldCanBeChanged() {
+	void testThatPrivateStaticFinalFieldCanBeChanged() {
 		Field privateStaticFinalField = ReflectionUtilities.getField(ClassWithPrivateStuff.class, "privateStaticFinalValue");
 		Logger newValue = getLogger(ReflectionUtilitiesTest.class.getSimpleName());
 		ReflectionUtilities.setPrivateStaticFinalField(privateStaticFinalField, newValue);
@@ -207,7 +207,7 @@ public class ReflectionUtilitiesTest {
 
 		}
 
-		public static String getPrivateStaticValue() {
+		static String getPrivateStaticValue() {
 			return privateStaticValue;
 		}
 
@@ -229,30 +229,30 @@ public class ReflectionUtilitiesTest {
 	}
 
 	protected static class ClassWithPublicStuff {
-		public String publicValue = DEFAULT_PUBLIC_VALUE;
-		public static String publicStaticValue = DEFAULT_PUBLIC_STATIC_VALUE;
+		String publicValue = DEFAULT_PUBLIC_VALUE;
+		static String publicStaticValue = DEFAULT_PUBLIC_STATIC_VALUE;
 
-		public ClassWithPublicStuff() {
+		ClassWithPublicStuff() {
 		}
 
-		public ClassWithPublicStuff(String parameterOne, Integer parameterTwo) {
+		ClassWithPublicStuff(String parameterOne, Integer parameterTwo) {
 
 		}
 
-		public static String getPublicStaticValue() {
+		static String getPublicStaticValue() {
 			return publicStaticValue;
 		}
 
-		public String getPublicValue() {
+		String getPublicValue() {
 			return publicValue;
 		}
 
-		public void setPublicValue(String parameter) {
+		void setPublicValue(String parameter) {
 			publicValue = parameter;
 		}
 	}
 
 	protected static class WrongClassType {
-		public String publicValue = DEFAULT_PUBLIC_VALUE;
+		String publicValue = DEFAULT_PUBLIC_VALUE;
 	}
 }

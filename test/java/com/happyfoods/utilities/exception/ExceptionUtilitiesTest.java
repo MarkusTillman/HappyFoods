@@ -1,37 +1,39 @@
 package com.happyfoods.utilities.exception;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ExceptionUtilitiesTest {
+@ExtendWith(MockitoExtension.class)
+class ExceptionUtilitiesTest {
 
 	@Test
-	public void testThatUncheckedExceptionThrownByCallableIsRethrownUnmodified() {
+	void testThatUncheckedExceptionThrownByCallableIsRethrownUnmodified() {
 		assertThatThrownBy(() -> ExceptionUtilities.uncheckThrowable(this::callableThrowingUncheckedException))
 				.isInstanceOfAny(RuntimeException.class)
 				.hasMessage("This is an unchecked exception");
 	}
 
 	@Test
-	public void testThatCheckedExceptionThrownByCallableIsUncheckedAndAndReThrownInARuntimeException() {
+	void testThatCheckedExceptionThrownByCallableIsUncheckedAndAndReThrownInARuntimeException() {
 		assertThatThrownBy(() -> ExceptionUtilities.uncheckThrowable(this::callableThrowingCheckedException))
 				.isInstanceOfAny(RuntimeException.class)
 				.hasMessage("java.io.IOException: This is a checked exception");
 	}
 
 	@Test
-	public void testThatValueIsReturnedFromCallableWhenNoExceptionIsThrown() {
+	void testThatValueIsReturnedFromCallableWhenNoExceptionIsThrown() {
 		assertThat(ExceptionUtilities.uncheckThrowable(() -> 1)).contains(1);
 	}
 
 	@Test
-	public void testThatUncheckedExceptionThrownByRunnableIsReThrownUnmodified() {
+	void testThatUncheckedExceptionThrownByRunnableIsReThrownUnmodified() {
 		assertThatThrownBy(() -> ExceptionUtilities.uncheckThrowable(this::runnableThrowingUncheckedException))
 				.isInstanceOfAny(RuntimeException.class, Error.class)
 				.hasMessage("This is an unchecked exception");
@@ -41,14 +43,14 @@ public class ExceptionUtilitiesTest {
 	 * Runnable.run() is not declared to throw checked exception, hence it needs to handled right away, defeating it's purpose here.
 	 */
 	@Test
-	public void testThatCheckedExceptionThrownByRunnableIsUncheckedAndAndReThrownInARuntimeException() {
+	void testThatCheckedExceptionThrownByRunnableIsUncheckedAndAndReThrownInARuntimeException() {
 //		assertThatThrownBy(() -> ExceptionUtilities.uncheckThrowable(this::runnableThrowingCheckedException))
 //				.isInstanceOfAny(RuntimeException.class)
 //				.hasMessage("java.io.IOException: This is a checked exception");
 	}
 
 	@Test
-	public void testThatRunnableWithoutThrownExceptionExecutesPeacefully() {
+	void testThatRunnableWithoutThrownExceptionExecutesPeacefully() {
 		assertThatCode(() -> ExceptionUtilities.uncheckThrowable(this::runnableNotThrowingException)).doesNotThrowAnyException();
 	}
 

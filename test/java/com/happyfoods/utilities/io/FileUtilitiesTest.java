@@ -1,5 +1,6 @@
 package com.happyfoods.utilities.io;
 
+import com.happyfoods.utilities.annotation.TagFast;
 import com.happyfoods.utilities.reflection.ReflectionUtilities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
+@TagFast
 @ExtendWith(MockitoExtension.class)
 class FileUtilitiesTest {
 

@@ -1,5 +1,6 @@
 package com.happyfoods.data;
 
+import com.happyfoods.utilities.annotation.TagFast;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@TagFast
 class FoodTest {
 
 	@Test

@@ -1,6 +1,7 @@
 package com.happyfoods.utilities;
 
 import com.google.common.collect.ImmutableMap;
+import com.happyfoods.utilities.annotation.TagFast;
 import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@TagFast
 class CollectionUtilitiesTest {
 
 	private static final ImmutableMap<String, Integer> keysWithUnsortedValues = ImmutableMap.of(

@@ -1,6 +1,7 @@
 package com.happyfoods.utilities.reflection;
 
 import com.google.common.collect.ImmutableList;
+import com.happyfoods.utilities.annotation.TagFast;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
+@TagFast
 @ExtendWith(MockitoExtension.class)
 class ReflectionUtilitiesTest {
 	private static final String DEFAULT_PRIVATE_VALUE = "defaultPrivateValue";

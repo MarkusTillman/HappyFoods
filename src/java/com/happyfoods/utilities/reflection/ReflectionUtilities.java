@@ -1,49 +1,54 @@
 package com.happyfoods.utilities.reflection;
 
-import javax.annotation.Nullable;
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 public class ReflectionUtilities {
 
 	private static final Logger logger = Logger.getLogger(ReflectionUtilities.class.getSimpleName());
 
-	public static @Nullable <T> T createInstance(Class<T> classToInstance) {
+	public static <T> Optional<T> createInstance(Class<T> classToInstance) {
 		try {
-			return classToInstance.newInstance();
+			Constructor<T> constructor = classToInstance.getDeclaredConstructor();
+			return Optional.of(constructor.newInstance());
 		} catch (Exception e) {
 			logger.severe(e.getMessage());
-			return null;
+			return Optional.empty();
 		}
 	}
 
-	public static @Nullable <T> T createInstance(Class<T> classToInstance, List<Class<?>> argumentTypes, Object... arguments) {
+	public static <T> Optional<T> createInstance(Class<T> classToInstance, List<Class<?>> argumentTypes, Object... arguments) {
 		try {
 			Constructor<T> constructor = classToInstance.getDeclaredConstructor(argumentTypes.toArray(new Class<?>[0]));
-			return constructor.newInstance(arguments);
+			return Optional.of(constructor.newInstance(arguments));
 		} catch (Exception e) {
 			logger.severe(e.getMessage());
-			return null;
+			return Optional.empty();
 		}
 	}
 
-	public static @Nullable Method getMethod(Class<?> classWithMethod, String methodName, Class<?>... parameterTypes) {
+	public static Optional<Method> getMethod(Class<?> classWithMethod, String methodName, Class<?>... parameterTypes) {
 		try {
-			return classWithMethod.getDeclaredMethod(methodName, parameterTypes);
+			return Optional.ofNullable(classWithMethod.getDeclaredMethod(methodName, parameterTypes));
 		} catch (NoSuchMethodException e) {
 			logger.warning("Could not find " + classWithMethod + "." + methodName + "()");
-			return null;
+			return Optional.empty();
 		}
 	}
 
-	public static @Nullable <T> T invokePublicMethod(Object instanceToInvokeOn, Method method, Class<T> returnType, Object... arguments) {
+	public static <T> Optional<T> invokePublicMethod(Object instanceToInvokeOn, Method method, Class<T> returnType, Object... arguments) {
 		try {
 			Object returnValue = method.invoke(instanceToInvokeOn, arguments);
-			return returnType.cast(returnValue);
+			return Optional.ofNullable(returnType.cast(returnValue));
 		} catch (IllegalAccessException | InvocationTargetException | ClassCastException e) {
 			logger.warning(e.getMessage());
-			return null;
+			return Optional.empty();
 		}
 	}
 
@@ -55,12 +60,12 @@ public class ReflectionUtilities {
 		}
 	}
 
-	public static @Nullable Field getField(Class<?> classWithField, String fieldName) {
+	public static Optional<Field> getField(Class<?> classWithField, String fieldName) {
 		try {
-			return classWithField.getDeclaredField(fieldName);
+			return Optional.ofNullable(classWithField.getDeclaredField(fieldName));
 		} catch (NoSuchFieldException e) {
 			logger.warning("Could not find " + classWithField + "." + fieldName);
-			return null;
+			return Optional.empty();
 		}
 	}
 

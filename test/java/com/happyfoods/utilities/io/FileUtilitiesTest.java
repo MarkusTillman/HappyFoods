@@ -24,7 +24,7 @@ class FileUtilitiesTest {
 
 	@BeforeEach
 	void beforeEachTest() {
-		Field loggerField = ReflectionUtilities.getField(FileUtilities.class, "logger");
+		Field loggerField = ReflectionUtilities.getField(FileUtilities.class, "logger").get();
 		ReflectionUtilities.setPrivateStaticFinalField(loggerField, logger);
 	}
 

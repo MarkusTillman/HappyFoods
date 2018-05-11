@@ -26,8 +26,10 @@ class ReflectionUtilitiesTest {
 	private static final String DEFAULT_CONSTANT_VALUE = "defaultConstantValue";
 	private static final String DEFAULT_PUBLIC_VALUE = "defaultPublicValue";
 	private static final String DEFAULT_PUBLIC_STATIC_VALUE = "defaultPublicStaticValue";
-	private static final String ERROR_CANNOT_ACCESS_PRIVATE_MEMBER = "Class com.happyfoods.utilities.reflection.ReflectionUtilities can not access a member of class com.happyfoods.utilities.reflection.ReflectionUtilitiesTest$ClassWithPrivateStuff with modifiers \"private\"";
-	private static final String COULD_NOT_FIND_METHOD = "Could not find class com.happyfoods.utilities.reflection.ReflectionUtilitiesTest$ClassWithPrivateStuff.getNonExistingMethod()";
+	private static final String ERROR_CANNOT_ACCESS_PRIVATE_MEMBER = String.format("class %s cannot access a member of class %s$%s with modifiers \"private\"",
+			ReflectionUtilities.class.getName(), ReflectionUtilitiesTest.class.getName(), ClassWithPrivateStuff.class.getSimpleName());
+	private static final String COULD_NOT_FIND_METHOD = String.format("Could not find class %s$%s.getNonExistingMethod()",
+			ReflectionUtilitiesTest.class.getName(), ClassWithPrivateStuff.class.getSimpleName());
 
 	@Spy
 	private Logger logger = getLogger(ReflectionUtilitiesTest.class.getSimpleName());

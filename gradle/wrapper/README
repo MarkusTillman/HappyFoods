@@ -1,0 +1,2 @@
+To update wrapper version: ./gradlew wrapper --gradle-version=4.7 --distribution-type=bin
+To set java version: ./gradlew -Dorg.gradle.java.home="C:/Program Files/Java/jdk-10.0.1"

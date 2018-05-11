@@ -7,7 +7,8 @@ hs_err_pid*
 
 # Gradle
 .gradle/
-gradle/
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
 gradlew
 gradlew.bat
 

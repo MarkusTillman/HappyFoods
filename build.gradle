@@ -16,6 +16,8 @@ dependencies {
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '+'
     testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '+'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '+'
+
+    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '+'
 }
 
 sourceSets {
@@ -35,5 +37,17 @@ sourceSets {
         resources {
             srcDirs = ['test/resources']
         }
+    }
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+
+    reports {
+        html.enabled = true
     }
 }

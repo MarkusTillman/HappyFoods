@@ -1,3 +1,4 @@
 To update gradle version:                   choco upgrade gradle
 To set gradle's java version:               set JAVA_HOME to C:\Progra~1\Java\jdk-10.0.1
+    In IDEA:                                File -> Settings -> Build, Execution, Deployment -> Build Tools -> Gradle -> Set JVM to project SDK or 10.
 To set gradle's wrapper version:            gradle wrapper --gradle-version 4.7

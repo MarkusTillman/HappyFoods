@@ -3,7 +3,11 @@ package com.happyfoods.data;
 
 import com.google.common.collect.ImmutableList;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 public class Food implements BusinessData {
 
@@ -57,11 +61,16 @@ public class Food implements BusinessData {
 				'}';
 	}
 
-	static Builder builder(String name) {
+	public static Builder builder(String name) {
+		return new Builder(name);
+	}
+
+	public Builder buildUpon() {
 		return new Builder(name);
 	}
 
 	static class Builder {
+
 		private String name;
 		private String description;
 		private List<Nutrient> nutrients = new LinkedList<>();

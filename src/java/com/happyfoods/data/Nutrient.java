@@ -104,7 +104,11 @@ public class Nutrient implements BusinessData {
 				'}';
 	}
 
-	static Builder builder(String name) {
+	public static Builder builder(String name) {
+		return new Builder(name);
+	}
+
+	public Builder buildUpon() {
 		return new Builder(name);
 	}
 

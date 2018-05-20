@@ -1,3 +1,5 @@
+import com.happyfoods.utilities.annotation.TagValues
+
 group 'HappyFoods'
 version '1.0-SNAPSHOT'
 
@@ -40,14 +42,27 @@ sourceSets {
     }
 }
 
-test {
-    useJUnitPlatform()
-
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
-
-    reports {
-        html.enabled = true
+buildscript {
+    dependencies {
+        classpath files('build/classes/java/test/')
     }
 }
+
+test {
+    useJUnitPlatform()
+    testLogging.events "passed", "skipped", "failed"
+    reports.html.enabled = true
+}
+
+task smokeTest(type: Test, dependsOn: assemble) {
+    group = 'Verification'
+    description = 'Runs the tests that confirm that the basic functionality of the system works.'
+
+    useJUnitPlatform() {
+        includeTags TagValues.SMOKE_TEST
+    }
+    testLogging.events "passed", "skipped", "failed"
+    reports.html.enabled = true
+}
+
+tasks.build.doLast { smokeTest }

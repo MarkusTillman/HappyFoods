@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Tag(TagValues.FAST_TEST)
-public @interface TagFast {
+@Tag(TagValues.SMOKE_TEST)
+public @interface TagSmoke {
 }

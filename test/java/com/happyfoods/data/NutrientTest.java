@@ -1,11 +1,13 @@
 package com.happyfoods.data;
 
 import com.happyfoods.utilities.annotation.TagFast;
+import com.happyfoods.utilities.annotation.TagSmoke;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @TagFast
+@TagSmoke
 class NutrientTest {
 
 	@Test

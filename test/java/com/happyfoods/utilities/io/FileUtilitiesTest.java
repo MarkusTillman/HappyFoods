@@ -7,8 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.lang.reflect.Field;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,6 +26,7 @@ class FileUtilitiesTest {
 
 	@BeforeEach
 	void beforeEachTest() {
+		Mockito.reset(logger);
 		Field loggerField = ReflectionUtilities.getField(FileUtilities.class, "logger").get();
 		ReflectionUtilities.setPrivateStaticFinalField(loggerField, logger);
 	}
@@ -42,8 +45,9 @@ class FileUtilitiesTest {
 
 	@Test
 	void testThatFileHandlerWithNameCanBeCreated() {
-		FileUtilities.createFileHandler("fileHandler").get();
+		FileHandler handler = FileUtilities.createFileHandler("fileHandler").get();
 		verifyZeroInteractions(logger);
+		handler.close(); // todo: remove once test framework deals with this
 	}
 
 	@Test

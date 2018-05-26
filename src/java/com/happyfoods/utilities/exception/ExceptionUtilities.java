@@ -1,13 +1,14 @@
 package com.happyfoods.utilities.exception;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.concurrent.Callable;
 
 public class ExceptionUtilities {
 
-	public static <T> Optional<T> uncheckThrowable(Callable<T> callable) {
+	@Nullable
+	public static <T> T uncheckThrowable(Callable<T> callable) {
 		try {
-			return Optional.ofNullable(callable.call());
+			return callable.call();
 		} catch (Error | RuntimeException e) {
 			throw e;
 		} catch (Throwable e) {

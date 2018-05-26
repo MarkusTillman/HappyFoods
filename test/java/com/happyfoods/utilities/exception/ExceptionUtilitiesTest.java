@@ -28,7 +28,7 @@ class ExceptionUtilitiesTest {
 
 	@Test
 	void testThatValueIsReturnedFromCallableWhenNoExceptionIsThrown() {
-		assertThat(ExceptionUtilities.uncheckThrowable(() -> 1)).contains(1);
+		assertThat(ExceptionUtilities.uncheckThrowable(() -> 1)).isEqualTo(1);
 	}
 
 	@Test

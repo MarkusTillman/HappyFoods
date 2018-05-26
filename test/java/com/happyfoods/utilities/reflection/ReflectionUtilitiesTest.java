@@ -1,12 +1,12 @@
 package com.happyfoods.utilities.reflection;
 
 import com.google.common.collect.ImmutableList;
+import com.happyfoods.framework.TestExtension;
 import com.happyfoods.utilities.annotation.TagFast;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Spy;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
 @TagFast
-@ExtendWith(MockitoExtension.class)
+@ExtendWith(TestExtension.class)
 class ReflectionUtilitiesTest {
 	private static final String DEFAULT_PRIVATE_VALUE = "defaultPrivateValue";
 	private static final String DEFAULT_PRIVATE_STATIC_VALUE = "defaultPrivateStaticValue";

@@ -14,8 +14,17 @@ public class ReflectionUtilities {
 	private static final Logger logger = Logger.getLogger(ReflectionUtilities.class.getSimpleName());
 
 	public static <T> Optional<T> createInstance(Class<T> classToInstance) {
+		return createInstance(classToInstance, false);
+	}
+
+	public static <T> Optional<T> createInstanceUsingPrivateConstructor(Class<T> classToInstance) {
+		return createInstance(classToInstance, true);
+	}
+
+	private static <T> Optional<T> createInstance(Class<T> classToInstance, boolean usingPrivateConstructor) {
 		try {
 			Constructor<T> constructor = classToInstance.getDeclaredConstructor();
+			constructor.setAccessible(usingPrivateConstructor);
 			return Optional.of(constructor.newInstance());
 		} catch (Exception e) {
 			logger.severe(e.getMessage());
@@ -24,8 +33,17 @@ public class ReflectionUtilities {
 	}
 
 	public static <T> Optional<T> createInstance(Class<T> classToInstance, List<Class<?>> argumentTypes, Object... arguments) {
+		return createInstance(classToInstance, false, argumentTypes, arguments);
+	}
+
+	public static <T> Optional<T> createInstanceUsingPrivateConstructor(Class<T> classToInstance, List<Class<?>> argumentTypes, Object... arguments) {
+		return createInstance(classToInstance, true, argumentTypes, arguments);
+	}
+
+	private static <T> Optional<T> createInstance(Class<T> classToInstance, boolean usingPrivateConstructor, List<Class<?>> argumentTypes, Object[] arguments) {
 		try {
 			Constructor<T> constructor = classToInstance.getDeclaredConstructor(argumentTypes.toArray(new Class<?>[0]));
+			constructor.setAccessible(usingPrivateConstructor);
 			return Optional.of(constructor.newInstance(arguments));
 		} catch (Exception e) {
 			logger.severe(e.getMessage());

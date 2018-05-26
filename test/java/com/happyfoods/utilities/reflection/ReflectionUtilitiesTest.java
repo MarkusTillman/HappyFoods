@@ -52,6 +52,11 @@ class ReflectionUtilitiesTest {
 	}
 
 	@Test
+	void testCreatingAnInstanceOfPublicClassWithPrivateConstructor() {
+		assertThat(ReflectionUtilities.createInstanceUsingPrivateConstructor(ClassWithPrivateStuff.class)).isNotEmpty();
+	}
+
+	@Test
 	void testThatCreatingAnInstanceOfPrivateClassLogsAndReturnsNull() {
 		Optional<ClassWithPrivateStuff> instance = ReflectionUtilities.createInstance(ClassWithPrivateStuff.class,
 				ImmutableList.of(String.class, Integer.class),

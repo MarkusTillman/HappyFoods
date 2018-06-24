@@ -1,5 +1,6 @@
 package com.happyfoods.data;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -16,8 +17,8 @@ public class Nutrient implements BusinessData {
 	private Boolean causesOxidation;
 
 	private Nutrient(Builder builder) {
-		name = builder.name;
-		description = builder.description;
+		name = builder.name == null ? "" : builder.name;
+		description = builder.description == null ? "" : builder.description;
 		causesInflammation = builder.causesInflammation;
 		causesHeartDisease = builder.causesHeartDisease;
 		causesMentalIllness = builder.causesMentalIllness;
@@ -32,7 +33,7 @@ public class Nutrient implements BusinessData {
 	}
 
 	public String getDescription() {
-		return description == null ? "" : description;
+		return description;
 	}
 
 	public Optional<Boolean> causesInflammation() {
@@ -62,7 +63,6 @@ public class Nutrient implements BusinessData {
 	public Optional<Boolean> causesOxidation() {
 		return Optional.ofNullable(causesOxidation);
 	}
-
 
 	@Override
 	public boolean equals(Object o) {
@@ -112,7 +112,7 @@ public class Nutrient implements BusinessData {
 		return new Builder(name);
 	}
 
-	static class Builder {
+	public static class Builder {
 		private String name;
 		private String description;
 		private Boolean causesInflammation;
@@ -127,42 +127,42 @@ public class Nutrient implements BusinessData {
 			this.name = name;
 		}
 
-		public Builder description(String description) {
+		public Builder description(@Nullable String description) {
 			this.description = description;
 			return this;
 		}
 
-		public Builder causesInflammation(boolean causesInflammation) {
+		public Builder causesInflammation(@Nullable Boolean causesInflammation) {
 			this.causesInflammation = causesInflammation;
 			return this;
 		}
 
-		public Builder causesHeartDisease(boolean causesHeartDisease) {
+		public Builder causesHeartDisease(@Nullable Boolean causesHeartDisease) {
 			this.causesHeartDisease = causesHeartDisease;
 			return this;
 		}
 
-		public Builder causesMentalIllness(boolean causesMentalIllness) {
+		public Builder causesMentalIllness(@Nullable Boolean causesMentalIllness) {
 			this.causesMentalIllness = causesMentalIllness;
 			return this;
 		}
 
-		public Builder causesDepression(boolean causesDepression) {
+		public Builder causesDepression(@Nullable Boolean causesDepression) {
 			this.causesDepression = causesDepression;
 			return this;
 		}
 
-		public Builder causesStress(boolean causesStress) {
+		public Builder causesStress(@Nullable Boolean causesStress) {
 			this.causesStress = causesStress;
 			return this;
 		}
 
-		public Builder causesObesity(boolean causesObesity) {
+		public Builder causesObesity(@Nullable Boolean causesObesity) {
 			this.causesObesity = causesObesity;
 			return this;
 		}
 
-		public Builder causesOxidation(boolean causesOxidation) {
+		public Builder causesOxidation(@Nullable Boolean causesOxidation) {
 			this.causesOxidation = causesOxidation;
 			return this;
 		}

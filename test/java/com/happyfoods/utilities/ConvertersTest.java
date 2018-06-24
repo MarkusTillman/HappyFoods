@@ -13,13 +13,18 @@ class ConvertersTest {
 		@Nested
 		class Miscellaneous {
 			@Test
-			void testThatNullStringIsConvertedToFalse() {
-				assertThat(BooleanConverter.toBoolean(null)).isFalse();
+			void testThatNullStringIsNotConverted() {
+				assertThat(BooleanConverter.toBoolean(null)).isNull();
 			}
 
 			@Test
-			void testThatEmptyStringIsConvertedToFalse() {
-				assertThat(BooleanConverter.toBoolean("")).isFalse();
+			void testThatEmptyStringIsNotConverted() {
+				assertThat(BooleanConverter.toBoolean("")).isNull();
+			}
+
+			@Test
+			void testThatStringWithSpaceIsNotConverted() {
+				assertThat(BooleanConverter.toBoolean(" ")).isNull();
 			}
 
 			@Test

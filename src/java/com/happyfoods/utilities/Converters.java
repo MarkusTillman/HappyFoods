@@ -1,15 +1,13 @@
 package com.happyfoods.utilities;
 
-import com.google.common.base.Strings;
-
 import javax.annotation.Nullable;
 
 public class Converters {
 
 	public static class BooleanConverter {
 		public static @Nullable Boolean toBoolean(@Nullable String string) {
-			if (Strings.isNullOrEmpty(string)) {
-				return false;
+			if (string == null) {
+				return null;
 			}
 			String trimmedString = string.trim();
 			if (isFalse(trimmedString)) {
@@ -23,8 +21,7 @@ public class Converters {
 		private static boolean isFalse(String trimmedString) {
 			return trimmedString.equalsIgnoreCase("no") ||
 					trimmedString.equals("0") ||
-					trimmedString.equalsIgnoreCase("false") ||
-					Strings.isNullOrEmpty(trimmedString);
+					trimmedString.equalsIgnoreCase("false");
 		}
 
 		private static boolean isTrue(String trimmedString) {

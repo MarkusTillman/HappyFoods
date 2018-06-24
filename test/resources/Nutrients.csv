@@ -1,0 +1,52 @@
+Name,                   Inflammatory,       Heart-disease,  Mental illness,  Depression,    Stress,             Obesity,     Oxidizer,   Comments
+Long omega-3,           no,                 no,             no,            ,              ,                   ,            ,
+Short omega-3,          no,                 no,             no,            ,              ,                   ,            ,           Less effective than long omega-3
+Vitamin-C,              no,                 ,               ,               no,            ,                   ,            ,
+Vitamin-D,              no,                 ,               no,            no,            ,                   ,            ,           Stronger bones
+Vitamin-B6,             ,                   ,               ,               no,            ,                   ,            ,
+Vitamin-B9,             ,                   ,               ,               no,            ,                   ,            ,
+Vitamin-B12,            ,                   ,               ,               no,            ,                   ,            ,
+Vitamin-E,              ,                   ,               ,               ,              ,                   ,            ,           Prevents AGE (and Alzheimer's?)
+Vitamin-K,              no,                 ,               ,               no,            ,                   ,            ,
+Magnesium,              ,                   ,               ,               no,            ,                   ,            ,
+Zinc,                   ,                   ,               ,               no,            ,                   ,            ,
+Quercetin,              no,                 ,               ,               no,            no,                 ,            ,
+Kaempferol,             ,                   ,               ,               no,            no,                 ,            ,
+Apigenin,               no,                 ,               ,               ,              ,                   ,            ,
+Luteolin,               no,                 ,               ,               ,              ,                   ,            ,
+Oleocanthal,            ,                   ,               ,               ,              ,                   ,            ,           Works as painkiller; Can prevent joint pain and Alzheimers
+Selen,                  no,                 ,               ,               ,              ,                   ,            ,           Considered to counter some cancers
+Olive oil,              no,                 Lower risk,     ,               ,              ,                   ,            no,         Lowers risk of atherosclerosis and myocardial infarction
+Cholesterol LDL,        ,                   yes,            ,               ,              ,                   ,            ,
+Resistant starch,       no,                 ,               ,               ,              ,                   no?,         ,           Regulates blood sugar; Reduces chance of cancer (if no wild game)
+Beta glucans,           ,                   no,             ,               ,              ,                   no?,         ,           Regulates blood sugar; Regulates hunger;
+Arabinoxylan,           no,                 ,               ,               ,              ,                   no?,         ,           Like resistant starch but in different places in colon
+Inulin,                 no,                 ,               ,               ,              ,                   no,          ,           Together with FOS reduce weight in children
+Fructooligosaccharides, ,                   ,               ,               ,              ,                   ,            ,
+Pektin,                 ,                   ,               ,               ,              ,                   ,            ,           Breaks down in freezer
+Lignin,                 ,                   ,               ,               ,              ,                   ,            ,           Helps constipation
+Kitin,                  ,                   ,               ,               ,              ,                   ,            ,
+Vinegar,                ,                   no,             ,               ,              ,                   no,          ,           Increase resistant starch in cold potato; Regulates blood sugar; Increase nutrition
+Flavonoids,             ,                   Lower risk,     ,               ,               ,                   ,           ,
+Polyphenols,            ,                   ,               ,               ,               ,                   ,           no,
+Lycopene,               ,                   ,               ,               ,               ,                   ,           ,           Considered to counteract prostate cancer
+Curcumin,               no,                 ,               ,               No?,            ,                   ,           ,           Thought to be able to protect everything from cancer to rheumatoid arthritis; 1 depression study; Black pepper and heat and fat to increase effectiveness
+Gingeroles,             ,                   no,             ,               ,               ,                   ,            ,          Counteract cancer and metastasesM type 2 diabetes; gastrointestinal disorders; respiratory tract infections; asthma and rheumatism, Ginger
+Shogaol,                ,                   no,             ,               ,               ,                   ,            ,          Counteract cancer and metastasesM type 2 diabetes; gastrointestinal disorders; respiratory tract infections; asthma and rheumatism, Ginger
+Paradolm,               ,                   no,             ,               ,               ,                   ,            ,          Counteract cancer and metastasesM type 2 diabetes; gastrointestinal disorders; respiratory tract infections; asthma and rheumatism, Ginger
+Piperine,               ,                   ,               ,               no,             ,                   ,           ,           As strong as some pharmaceuticals; already at 0.5g/day; Increase turmeric uptake
+Coumarin,               no,                 ,               no,            ,               ,                   no,         no,
+Tryptophan,             ,                   ,               ,               no,             ,                   ,           ,           Precursor to serotonin happiness hormone; Intake increased with plant-based diet
+Cacao,                  ,                   ,               no,            no,             no,                 ,           ,           Max 40g/day
+Nitrates,               no,                 no,             no,            ,               ,                   ,           ,           Lingonberry increases positive effect; Avoid cooking since it is water soluble
+Sugar,                  yes,                yes,            yes,             yes,           ,                   yes,         ,           Causes diabetes type 2; Increase biological age (diabetes 3) and Alzheimer's?; Limit to 60g/day
+Trans fats,             yes,                no,             ,               yes,           ,                   ,            ,
+Palm oil,               ,                   ,               ,               ,              ,                   ,            ,           Cause cancer and damage kidneys and testicles when refined
+Omega-6,                yes,                ,               ,               ,              ,                   ,            ,
+Saccharin,              ,                   ,               ,               ,              ,                   yes,         ,           Cause diabetes 2
+E433,                   yes,                ,               ,               yes,           ,                   yes,         ,           Cause diabetes; intestine disease IBS
+E466,                   yes,                ,               ,               yes,           ,                   yes,         ,           Cause diabetes; intestine disease IBS
+Red meat,               yes,                ,               ,               ,               ,                   ,           ,
+Resveratrol,            no,                 ,               ,               ,               ,                   ,           ,
+Alcohol,                ,                   no,             ,               ,               ,                   ,           ,           Depression is higher for non-drinkers and big consumers; 1-2 red wine/day.
+Arachidonic acid,       yes,                ,               ,               ,               ,                   ,           ,

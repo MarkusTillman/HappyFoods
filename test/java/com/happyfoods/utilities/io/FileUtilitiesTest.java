@@ -4,6 +4,7 @@ import com.happyfoods.framework.TestExtension;
 import com.happyfoods.utilities.annotation.TagFast;
 import com.happyfoods.utilities.reflection.ReflectionUtilities;
 import org.apache.commons.csv.CSVFormat;
+import org.assertj.core.util.Files;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -60,6 +62,7 @@ class FileUtilitiesTest {
 			FileHandler handler = FileUtilities.createFileHandler("fileHandler").get();
 			verifyZeroInteractions(logger);
 			handler.close(); // todo: remove once test framework deals with this
+			Files.delete(new File("fileHandler"));
 		}
 	}
 

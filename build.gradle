@@ -57,7 +57,7 @@ test {
 
 task smokeTest(type: Test, dependsOn: assemble) {
     group = 'Verification'
-    description = 'Runs the tests that confirm that the basic functionality of the system works.'
+    description = 'Runs the tests that confirms that the basic functionality of the system works. These should be fast!'
 
     useJUnitPlatform() {
         includeTags TagValues.SMOKE_TEST

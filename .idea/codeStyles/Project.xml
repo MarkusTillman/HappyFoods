@@ -9,6 +9,7 @@
       <option name="RIGHT_MARGIN" value="130" />
     </codeStyleSettings>
     <codeStyleSettings language="JAVA">
+      <option name="METHOD_ANNOTATION_WRAP" value="0" />
       <indentOptions>
         <option name="USE_TAB_CHARACTER" value="true" />
       </indentOptions>
